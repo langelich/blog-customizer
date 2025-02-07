@@ -97,7 +97,6 @@ export const ArticleParamsForm = ({
 					onSubmit={(evt) => handleSubmit(selected, evt)}
 					onReset={handleReset}>
 					<Text
-						as='h1'
 						size={31}
 						dynamic={false}
 						weight={800}
