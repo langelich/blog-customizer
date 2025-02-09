@@ -20,9 +20,9 @@ import { RadioGroup } from 'src/ui/radio-group';
 import { Separator } from 'src/ui/separator';
 
 export const ArticleParamsForm = ({
-	articleState,
+	setArticleState,
 }: {
-	articleState: (newValue: ArticleStateType) => void;
+	setArticleState: (newValue: ArticleStateType) => void;
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const asideRef = useRef<HTMLElement>(null);
@@ -37,7 +37,7 @@ export const ArticleParamsForm = ({
 
 	const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
-		articleState({
+		setArticleState({
 			fontFamilyOption: formState.fontFamilyOption,
 			fontSizeOption: formState.fontSizeOption,
 			fontColor: formState.fontColor,
@@ -47,20 +47,8 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleReset = () => {
-		articleState({
-			fontFamilyOption: defaultArticleState.fontFamilyOption,
-			fontSizeOption: defaultArticleState.fontSizeOption,
-			fontColor: defaultArticleState.fontColor,
-			contentWidth: defaultArticleState.contentWidth,
-			backgroundColor: defaultArticleState.backgroundColor,
-		});
-		setFormState({
-			fontFamilyOption: defaultArticleState.fontFamilyOption,
-			backgroundColor: defaultArticleState.backgroundColor,
-			fontColor: defaultArticleState.fontColor,
-			contentWidth: defaultArticleState.contentWidth,
-			fontSizeOption: defaultArticleState.fontSizeOption,
-		});
+		setArticleState(defaultArticleState);
+		setFormState(defaultArticleState);
 	};
 
 	return (
@@ -71,7 +59,7 @@ export const ArticleParamsForm = ({
 				ref={asideRef}>
 				<form
 					className={styles.form}
-					onSubmit={(evt) => handleSubmit(evt)}
+					onSubmit={handleSubmit}
 					onReset={handleReset}>
 					<Text
 						as='h2'
